@@ -1,27 +1,7 @@
 # Ignore everything
 *
 
-# Except the Core folder
+# Except these:
+!.gitignore
 !Core/
-!Core/**
-
-# Ignore build and IDE metadata
-build/
-.mxproject
-.mx.scratch
-.settings/
-*.launch
-*.log
-*.bak
-*.tmp
-*.elf
-*.map
-*.o
-*.d
-*.bin
-*.hex
-*.list
-
-# Ignore OS files
-.DS_Store
-Thumbs.db
+!lab3_adc.ioc
