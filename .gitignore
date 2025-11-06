@@ -1,24 +1,27 @@
-# Ignore build and generated files
-/build/
-*.o
-*.elf
-*.bin
-*.hex
-*.map
-*.lst
+# Ignore everything
+*
 
-# Ignore STM32CubeIDE workspace junk
+# Except the Core folder
+!Core/
+!Core/**
+
+# Ignore build and IDE metadata
+build/
 .mxproject
 .mx.scratch
 .settings/
-Debug/
-Release/
-
-# Ignore temporary editor files
-*.swp
+*.launch
+*.log
 *.bak
 *.tmp
-*.log
+*.elf
+*.map
+*.o
+*.d
+*.bin
+*.hex
+*.list
 
-# Only keep source (Core)
-!Core/
+# Ignore OS files
+.DS_Store
+Thumbs.db
