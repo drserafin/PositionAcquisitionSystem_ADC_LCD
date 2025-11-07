@@ -47,7 +47,7 @@ void HAL_ADC_ConvCpltCallback(ADC_HandleTypeDef* hadc_ptr)
 
 ## 🧩 adc.c — Function Explanations
 
-### `void ADC_Init(void)`
+### `void ADC_Calibrate(void)`
 **Meaning:**  
 This function prepares the ADC to take accurate measurements.  
 
