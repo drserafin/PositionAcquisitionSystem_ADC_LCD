@@ -22,7 +22,7 @@ int main(void)
     MX_TIM2_Init();
     MX_ADC_Init();
 
-    ADC_Init();
+    ADC_Calibrate();
     LCD_Init();
     LCD_Clear();
 
@@ -50,14 +50,17 @@ int main(void)
     }
 }
 
+// Timer interrupts triggers 10hz
 void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
 {
     if (htim->Instance == TIM2)
     {
-        HAL_ADC_Start_IT(&hadc); 
+        HAL_ADC_Start_IT(&hadc); // starts a new ADC conversion
     }
 }
 
+// This callback runs automatically after the ADC finishes conversion.
+// The ADC interrupt triggers it, and we read the converted value here.
 void HAL_ADC_ConvCpltCallback(ADC_HandleTypeDef* hadc_ptr)
 {
     ADC_Mailbox = HAL_ADC_GetValue(&hadc);

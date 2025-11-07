@@ -3,11 +3,12 @@
 
 extern ADC_HandleTypeDef hadc;
 
-void ADC_Init(void)
+void ADC_Calibrate(void)
 {
     HAL_ADCEx_Calibration_Start(&hadc);
 }
 
+// Simple 4-sample exponential filter for smoothing ADC noise
 uint32_t ADC_Filter(uint32_t newSample)
 {
     static uint32_t filteredValue = 0;
@@ -57,3 +58,19 @@ uint32_t ADC_ConvertToDistance(uint32_t adcValue)
         return OUT_Q3 + ((adcValue - adc_q3) * (OUT_MAX - OUT_Q3)) / (adc_max - adc_q3);
     }
 }
+
+/*
+References:
+
+I referred to the manual to learn more about the general-purpose timer embedded 
+in the STM32. After configuring the ADC, I studied TIM2 and asked ChatGPT for help 
+understanding the parameters of the general-purpose timer and how to achieve a 
+timer period interrupt at 10 Hz. I used an LED light to visually confirm that the 
+period interrupt was working and sampling at 10 Hz before moving on to test the slider.
+
+References:
+
+[1] STMicroelectronics, *UM1525: Discovery kit for STM32F0 series – User Manual*, Rev. 3, Apr. 2018. Accessed: Nov. 7, 2025. [Online]. Available: https://www.st.com/resource/en/user_manual/um1525-discovery-kit-for-stm32f0-series-stmicroelectronics.pdf
+
+[2] OpenAI, *ChatGPT*, Accessed: Nov. 7, 2025. [Online]. Available: https://chat.openai.com
+*/
